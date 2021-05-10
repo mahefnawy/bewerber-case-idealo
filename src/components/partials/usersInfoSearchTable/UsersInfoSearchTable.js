@@ -61,14 +61,12 @@ class UsersInfoSearchTable extends React.Component {
       ),
   });
 
-  handleFullEditClick = (e) => {
-    let targetID = e.target.parentNode.parentNode.parentNode.parentNode.getAttribute("data-row-key");
-    this.props.onFullEditClick(targetID);
+  handleFullEditClick = (record) => {
+    this.props.onFullEditClick(record);
   }
 
-  handleDeleteClick = (e) => {
-    let targetID = e.target.parentNode.parentNode.parentNode.parentNode.getAttribute("data-row-key");
-    this.props.onDeleteClick(targetID);
+  handleDeleteClick = (id) => {
+    this.props.onDeleteClick(id);
   }
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -146,8 +144,8 @@ class UsersInfoSearchTable extends React.Component {
         key: 'action',
         render: (text, record) => (
           <Space size="middle">
-            <span onClick={(e) => this.handleFullEditClick(e)}>Edit</span>
-            <span onClick={(e) => this.handleDeleteClick(e)}>Delete</span>
+            <span onClick={(e) => this.handleFullEditClick(record)}>Edit</span>
+            <span onClick={(e) => this.handleDeleteClick(record.id)}>Delete</span>
           </Space>
         ),
       },
