@@ -8,15 +8,33 @@ import './App.scss';
 
 function App() {
   const { TextArea } = Input;
+  const [form] = Form.useForm();
   const [usersDataAtomRecoilState, setUsersDataAtomRecoilState] = useRecoilState(usersDataAtom);
+  const [addUserFormInitialValues, setAddUserFormInitialValues] = useState({ gender: 'male' });
   const [isAddUserModalVisible, setIsAddUserModalVisible] = useState(false);
 
   function handleCancelAddUserModal() {
     setIsAddUserModalVisible(false);
   };
 
-  function onFinish(values) {
-    console.log(values)
+  function onAddUser(values) {
+    let oldDataArr = usersDataAtomRecoilState;
+    let newDataArr = [...oldDataArr];
+    let newId = oldDataArr.length + 1;
+    let newUser =    {
+      "id": newId,
+      "username": values.username,
+      "gender": values.gender,
+      "firstname": values.firstname,
+      "surname": values.surname,
+      "address": values.address,
+      "quote": values.quote
+    }
+  
+    newDataArr.push(newUser);
+    setUsersDataAtomRecoilState(newDataArr)
+    setIsAddUserModalVisible(false);
+    form.resetFields();
   };
 
   return (
@@ -34,17 +52,18 @@ function App() {
           onCancel={handleCancelAddUserModal}
           closable={true}
           footer={false}
+          title="Add User"
           >
             <Row className="">
               <Col  xs={24} sm={24} md={24} lg={24} xl={24}>
-                <Form  name="" onFinish={onFinish} initialValues={{ gender: 'm' }}>
+                <Form form={form} name="adduserform" onFinish={onAddUser} initialValues={addUserFormInitialValues}>
                   <Form.Item name={['username']} label="User Name" rules={[{ required: false }]}>
                     <Input placeholder="User Name" style={{ width: 300, marginTop: 16, marginBottom: 16 }} allowClear/>
                   </Form.Item>
                   <Form.Item name={['gender']} label="Gender" rules={[{ required: false, }]}>
                     <Radio.Group className="">
-                      <Radio.Button value="m">Male</Radio.Button>
-                      <Radio.Button value="f">Female</Radio.Button>
+                      <Radio.Button value="male">Male</Radio.Button>
+                      <Radio.Button value="female">Female</Radio.Button>
                     </Radio.Group>
                   </Form.Item>
                   <Form.Item name={['firstname']} label="First Name" rules={[{ required: true, message: 'Please Enter First Name!' }]}>
