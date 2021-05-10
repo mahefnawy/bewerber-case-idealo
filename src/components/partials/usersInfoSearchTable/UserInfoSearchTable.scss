@@ -1,0 +1,14 @@
+@import "../../../styles/colors.scss";
+
+.ant-table-title {
+  background-color: $blue10;
+
+  .table-title {
+    color: $white;
+    font-size: 20px;
+  }  
+}
+
+.ant-table-footer {
+  background-color: $blue10 !important;
+}

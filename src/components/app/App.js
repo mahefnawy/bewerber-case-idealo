@@ -119,11 +119,11 @@ function App() {
   return (
     <div className="App">
       <Row className="over-flow-scroll">
-        <Col  xs={24} sm={24} md={24} lg={24} xl={24}>
+        <Col  xs={24} sm={24} md={24} lg={24} xl={24} className="mt10px">
           <UsersInfoSearchTable data={usersDataAtomRecoilState} onFullEditClick={onTableFullEditClickHandler} onDeleteClick={onTableDeleteClickHandler}/>
         </Col>
-        <Col  xs={24} sm={24} md={24} lg={24} xl={24}>
-          <Button className="checklists-cta-buttons" type="primary" icon={<PlusOutlined />} onClick={onNewUserClickHandler}>Add Resident</Button>
+        <Col  xs={24} sm={24} md={24} lg={24} xl={24} className="mt10px">
+          <Button className="checklists-cta-buttons" type="primary" icon={<PlusOutlined />} onClick={onNewUserClickHandler}>Add User</Button>
         </Col>
           <Modal
           centered
