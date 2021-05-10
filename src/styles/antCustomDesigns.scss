@@ -1,0 +1,14 @@
+@import "./styles.scss";
+
+.ant-space-item {
+  svg {
+    margin-bottom: 5px;
+  }
+}
+
+td {
+  span:hover {
+    color: $table-link-color;
+    cursor: pointer;
+  }
+}
