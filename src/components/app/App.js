@@ -13,6 +13,7 @@ function App() {
   const [addUserFormInitialValues, setAddUserFormInitialValues] = useState({ gender: 'male' });
   const [isAddUserModalVisible, setIsAddUserModalVisible] = useState(false);
   const [isEditUserModalVisible, setIsEditUserModalVisible] = useState(false);
+  const [isDeleteUserModalVisible, setIsDeleteUserModalVisible] = useState(false);
   const [activeId, setActiveId] = useState(false);
 
   function onTableFullEditClickHandler(record) {
@@ -22,7 +23,8 @@ function App() {
   };
 
   function onTableDeleteClickHandler(idValue) {
-    // console.log(idValue);
+    setActiveId(idValue)
+    setIsDeleteUserModalVisible(true);
   };
 
   function handleCancelAddUserModal() {
@@ -34,6 +36,11 @@ function App() {
     form.resetFields();
     setActiveId(false);
     setIsEditUserModalVisible(false);
+  };
+
+  function handleCancelDeleteUserModal() {
+    setActiveId(false);
+    setIsDeleteUserModalVisible(false);
   };
 
   //API
@@ -81,6 +88,28 @@ function App() {
     setIsEditUserModalVisible(false);
     setActiveId(false);
     form.resetFields();
+  };
+
+  function handleOkDeleteUserModal() {
+    let id = activeId;
+    let oldDataArr = usersDataAtomRecoilState;
+    let newDataArr = [...oldDataArr];
+    let filteredDataArr = newDataArr.filter(userObj => userObj.id !== id);
+    let reindexedDataArr = filteredDataArr.map((userObj, index)=>{
+      return userObj = {
+        "id": index+1,
+        "username": userObj.username,
+        "gender": userObj.gender,
+        "firstname": userObj.firstname,
+        "surname": userObj.surname,
+        "address": userObj.address,
+        "quote": userObj.quote
+      }
+    });
+
+    setUsersDataAtomRecoilState(reindexedDataArr)
+    setIsDeleteUserModalVisible(false);
+    setActiveId(false);
   };
 
   return (
@@ -167,6 +196,20 @@ function App() {
                     Submit
                   </Button>
                 </Form>
+              </Col>
+            </Row>
+          </Modal>
+          <Modal
+          centered
+          visible={isDeleteUserModalVisible}
+          onCancel={handleCancelDeleteUserModal}
+          onOk={handleOkDeleteUserModal}
+          closable={false}
+          title="Delete User"
+          >
+            <Row className="">
+              <Col  xs={24} sm={24} md={24} lg={24} xl={24}>
+                <span>Are you sure you want to delete this user?</span>
               </Col>
             </Row>
           </Modal>

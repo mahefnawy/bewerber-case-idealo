@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table, Input, Button, Space, Row } from 'antd';
+import { Table, Input, Button, Space, Row, Tooltip } from 'antd';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 class UsersInfoSearchTable extends React.Component {
   state = {
@@ -144,8 +144,8 @@ class UsersInfoSearchTable extends React.Component {
         key: 'action',
         render: (text, record) => (
           <Space size="middle">
-            <span onClick={(e) => this.handleFullEditClick(record)}>Edit</span>
-            <span onClick={(e) => this.handleDeleteClick(record.id)}>Delete</span>
+            <Tooltip title="Edit"><Button onClick={(e) => this.handleFullEditClick(record)} icon={<EditOutlined />} type="primary" shape="circle" className=""/></Tooltip>
+            <Tooltip title="Delete"><Button onClick={(e) => this.handleDeleteClick(record.id)} icon={<DeleteOutlined />} type="primary" shape="circle" danger className=""/></Tooltip>
           </Space>
         ),
       },
