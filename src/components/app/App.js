@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useLayoutEffect}  from 'react';
-import { Row, Col, Modal, Button, Form, Input, Radio, Select} from 'antd';
+import React, { useState }  from 'react';
+import { Row, Col, Modal, Button, Form, Input, Radio } from 'antd';
 import { PlusOutlined, SendOutlined } from '@ant-design/icons';
 import { useRecoilState } from "recoil";
 import { usersDataAtom } from "../../utils/atoms";
@@ -10,15 +10,21 @@ function App() {
   const { TextArea } = Input;
   const [form] = Form.useForm();
   const [usersDataAtomRecoilState, setUsersDataAtomRecoilState] = useRecoilState(usersDataAtom);
-  const [addUserFormInitialValues, setAddUserFormInitialValues] = useState({ gender: 'male' });
-  const [isAddUserModalVisible, setIsAddUserModalVisible] = useState(false);
-  const [isEditUserModalVisible, setIsEditUserModalVisible] = useState(false);
+  const [formInitialValues, setFormInitialValues] = useState({ gender: 'male' });
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [isDeleteUserModalVisible, setIsDeleteUserModalVisible] = useState(false);
   const [activeId, setActiveId] = useState(false);
+  const [action, setAction] = useState(false);
+
+  function onNewUserClickHandler() {
+    setAction('add');
+    setIsModalVisible(true)
+  };
 
   function onTableFullEditClickHandler(record) {
+    setAction('edit');
     setActiveId(record.id)
-    setIsEditUserModalVisible(true);
+    setIsModalVisible(true);
     form.setFieldsValue(record);
   };
 
@@ -27,15 +33,11 @@ function App() {
     setIsDeleteUserModalVisible(true);
   };
 
-  function handleCancelAddUserModal() {
-    form.resetFields();
-    setIsAddUserModalVisible(false);
-  };
-
-  function handleCancelEditUserModal() {
+  function handleCancelModal() {
+    setAction(false);
     form.resetFields();
     setActiveId(false);
-    setIsEditUserModalVisible(false);
+    setIsModalVisible(false);
   };
 
   function handleCancelDeleteUserModal() {
@@ -60,7 +62,8 @@ function App() {
   
     newDataArr.push(newUser);
     setUsersDataAtomRecoilState(newDataArr)
-    setIsAddUserModalVisible(false);
+    setIsModalVisible(false);
+    setAction(false);
     form.resetFields();
   };
 
@@ -85,7 +88,8 @@ function App() {
     });
 
     setUsersDataAtomRecoilState(finalDataArr)
-    setIsEditUserModalVisible(false);
+    setIsModalVisible(false);
+    setAction(false);
     setActiveId(false);
     form.resetFields();
   };
@@ -119,58 +123,19 @@ function App() {
           <UsersInfoSearchTable data={usersDataAtomRecoilState} onFullEditClick={onTableFullEditClickHandler} onDeleteClick={onTableDeleteClickHandler}/>
         </Col>
         <Col  xs={24} sm={24} md={24} lg={24} xl={24}>
-          <Button className="checklists-cta-buttons" type="primary" icon={<PlusOutlined />} onClick={(e)=>{setIsAddUserModalVisible(true)}}>Add Resident</Button>
+          <Button className="checklists-cta-buttons" type="primary" icon={<PlusOutlined />} onClick={onNewUserClickHandler}>Add Resident</Button>
         </Col>
           <Modal
           centered
-          visible={isAddUserModalVisible}
-          onCancel={handleCancelAddUserModal}
+          visible={isModalVisible}
+          onCancel={handleCancelModal}
           closable={true}
           footer={false}
-          title="Add User"
+          title={action === 'add' ? 'Add User' : 'Edit User'}
           >
             <Row className="">
               <Col  xs={24} sm={24} md={24} lg={24} xl={24}>
-                <Form form={form} name="adduserform" onFinish={onAddUser} initialValues={addUserFormInitialValues}>
-                  <Form.Item name={['username']} label="User Name" rules={[{ required: false }]}>
-                    <Input placeholder="User Name" style={{ width: 300, marginTop: 16, marginBottom: 16 }} allowClear/>
-                  </Form.Item>
-                  <Form.Item name={['gender']} label="Gender" rules={[{ required: false, }]}>
-                    <Radio.Group className="">
-                      <Radio.Button value="male">Male</Radio.Button>
-                      <Radio.Button value="female">Female</Radio.Button>
-                    </Radio.Group>
-                  </Form.Item>
-                  <Form.Item name={['firstname']} label="First Name" rules={[{ required: true, message: 'Please Enter First Name!' }]}>
-                    <Input placeholder="First Name" style={{ width: 300, marginTop: 16, marginBottom: 16 }} allowClear/>
-                  </Form.Item>
-                  <Form.Item name={['surname']} label="Surname" rules={[{ required: false }]}>
-                    <Input placeholder="Surname" style={{ width: 300, marginTop: 16, marginBottom: 16 }} allowClear/>
-                  </Form.Item>
-                  <Form.Item name={['address']} label="Address" rules={[{ required: false }]}>
-                    <TextArea placeholder="Address" style={{ width: 300, marginTop: 16, marginBottom: 16 }} allowClear/>
-                  </Form.Item>
-                  <Form.Item name={['quote']} label="Quote" rules={[{ required: false }]}>
-                    <TextArea placeholder="Quote" style={{ width: 300, marginTop: 16, marginBottom: 16 }} allowClear/>
-                  </Form.Item>
-                  <Button icon={<SendOutlined />} type="primary" htmlType="submit" className="submit-btn">
-                    Submit
-                  </Button>
-                </Form>
-              </Col>
-            </Row>
-          </Modal>
-          <Modal
-          centered
-          visible={isEditUserModalVisible}
-          onCancel={handleCancelEditUserModal}
-          closable={true}
-          footer={false}
-          title="Edit User"
-          >
-            <Row className="">
-              <Col  xs={24} sm={24} md={24} lg={24} xl={24}>
-                <Form form={form} name="adduserform" onFinish={onEditUser} initialValues={addUserFormInitialValues}>
+                <Form form={form} name="adduserform" onFinish={action === 'add' ? onAddUser : onEditUser} initialValues={formInitialValues}>
                   <Form.Item name={['username']} label="User Name" rules={[{ required: false }]}>
                     <Input placeholder="User Name" style={{ width: 300, marginTop: 16, marginBottom: 16 }} allowClear/>
                   </Form.Item>

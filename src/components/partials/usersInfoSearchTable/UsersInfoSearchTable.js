@@ -84,7 +84,6 @@ class UsersInfoSearchTable extends React.Component {
 
 
   render() {
-    const loading = this.props.tableLoading;
     const data = [
       ...this.props.data
     ];
