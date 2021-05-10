@@ -1,0 +1,20 @@
+@import "./styles.scss";
+
+svg {
+  margin-bottom: 5px;
+}
+
+td {
+  span:hover {
+    color: $table-link-color;
+    cursor: pointer;
+  }
+}
+
+.ant-modal-body {
+  text-align: center;
+}
+
+.ant-input-affix-wrapper {
+  margin-top: 0 !important;
+}
