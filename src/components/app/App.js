@@ -165,7 +165,6 @@ function App() {
             </Row>
           </Modal>
           <Modal
-          centered
           visible={isDeleteUserModalVisible}
           onCancel={handleCancelDeleteUserModal}
           onOk={handleOkDeleteUserModal}
