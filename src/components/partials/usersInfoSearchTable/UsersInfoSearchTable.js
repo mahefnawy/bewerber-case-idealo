@@ -139,7 +139,6 @@ class UsersInfoSearchTable extends React.Component {
       },
       {
         title: 'Action',
-        fixed: 'right',
         key: 'action',
         render: (text, record) => (
           <Space size="middle">
@@ -150,9 +149,7 @@ class UsersInfoSearchTable extends React.Component {
       },
     ];
     return (
-      <Row className="over-flow-scroll">
-        <Table title={() => 'Users information'}  footer={() => ''} columns={columns} dataSource={data} scroll={{ x: 10 }} sticky pagination={false}/>
-      </Row>
+        <Table title={() => 'Users information'}  footer={() => ''} columns={columns} dataSource={data}  pagination={false}/>
     )
   }
 }
