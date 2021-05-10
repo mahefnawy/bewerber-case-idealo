@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Input, Button, Space, Row, Tooltip } from 'antd';
+import { Table, Input, Button, Space, Tooltip } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import './UserInfoSearchTable.scss';
 
 class UsersInfoSearchTable extends React.Component {
   state = {
@@ -149,7 +150,7 @@ class UsersInfoSearchTable extends React.Component {
       },
     ];
     return (
-        <Table title={() => 'Users information'}  footer={() => ''} columns={columns} dataSource={data}  pagination={false}/>
+        <Table title={() => <span className="table-title">Users information</span>}  footer={() => ''} columns={columns} dataSource={data}  pagination={false}/>
     )
   }
 }
