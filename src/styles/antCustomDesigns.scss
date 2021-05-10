@@ -1,9 +1,7 @@
 @import "./styles.scss";
 
-.ant-space-item {
-  svg {
-    margin-bottom: 5px;
-  }
+svg {
+  margin-bottom: 5px;
 }
 
 td {
@@ -11,4 +9,12 @@ td {
     color: $table-link-color;
     cursor: pointer;
   }
+}
+
+.ant-modal-body {
+  text-align: center;
+}
+
+.ant-input-affix-wrapper {
+  margin-top: 0 !important;
 }
