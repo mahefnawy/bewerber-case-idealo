@@ -70,7 +70,7 @@ class UsersInfoSearchTable extends React.Component {
   }
 
   handleDuplicateClick = (record) => {
-    this.props.onFullEditClick(record);
+    this.props.onDuplicateClick(record);
   }
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -148,7 +148,7 @@ class UsersInfoSearchTable extends React.Component {
           <Space size="middle">
             <Tooltip title="Edit"><Button onClick={(e) => this.handleFullEditClick(record)} icon={<EditOutlined />} type="primary" shape="circle" className=""/></Tooltip>
             <Tooltip title="Delete"><Button onClick={(e) => this.handleDeleteClick(record.id)} icon={<DeleteOutlined />} type="primary" shape="circle" danger className=""/></Tooltip>
-            <Tooltip title="Duplicate"><Button onClick={(e) => this.handleDuplicateEditClick(record)} icon={<CopyOutlined />} className="duplicate-btn" type="primary" shape="circle"/></Tooltip>
+            <Tooltip title="Duplicate"><Button onClick={(e) => this.handleDuplicateClick(record)} icon={<CopyOutlined />} className="duplicate-btn" type="primary" shape="circle"/></Tooltip>
           </Space>
         ),
       },

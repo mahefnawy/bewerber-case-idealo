@@ -17,18 +17,18 @@ function App() {
 
   function onNewUserClickHandler() {
     setAction('add');
-    setIsModalVisible(true)
+    setIsModalVisible(true);
   };
 
   function onTableFullEditClickHandler(record) {
     setAction('edit');
-    setActiveId(record.id)
+    setActiveId(record.id);
     setIsModalVisible(true);
     form.setFieldsValue(record);
   };
 
   function onTableDeleteClickHandler(idValue) {
-    setActiveId(idValue)
+    setActiveId(idValue);
     setIsDeleteUserModalVisible(true);
   };
 
@@ -60,7 +60,7 @@ function App() {
     }
   
     newDataArr.push(newUser);
-    setUsersDataAtomRecoilState(newDataArr)
+    setUsersDataAtomRecoilState(newDataArr);
     setIsModalVisible(false);
     setAction(false);
     form.resetFields();
@@ -86,7 +86,7 @@ function App() {
       }
     });
 
-    setUsersDataAtomRecoilState(finalDataArr)
+    setUsersDataAtomRecoilState(finalDataArr);
     setIsModalVisible(false);
     setAction(false);
     setActiveId(false);
@@ -110,16 +110,34 @@ function App() {
       }
     });
 
-    setUsersDataAtomRecoilState(reindexedDataArr)
+    setUsersDataAtomRecoilState(reindexedDataArr);
     setIsDeleteUserModalVisible(false);
     setActiveId(false);
+  };
+
+  function onTableDuplicateClickHandler(record) {
+    let oldDataArr = usersDataAtomRecoilState;
+    let newDataArr = [...oldDataArr];
+    let newId = oldDataArr.length + 1;
+    let newUser =    {
+      "id": newId,
+      "username": record.username,
+      "gender": record.gender,
+      "firstname": record.firstname,
+      "surname": record.surname,
+      "address": record.address,
+      "quote": record.quote
+    }
+
+    newDataArr.push(newUser);
+    setUsersDataAtomRecoilState(newDataArr);
   };
 
   return (
     <div className="App">
       <Row className="over-flow-scroll">
         <Col  xs={24} sm={24} md={24} lg={24} xl={24} className="mt10px">
-          <UsersInfoSearchTable data={usersDataAtomRecoilState} onFullEditClick={onTableFullEditClickHandler} onDeleteClick={onTableDeleteClickHandler}/>
+          <UsersInfoSearchTable data={usersDataAtomRecoilState} onFullEditClick={onTableFullEditClickHandler} onDeleteClick={onTableDeleteClickHandler} onDuplicateClick={onTableDuplicateClickHandler}/>
         </Col>
         <Col  xs={24} sm={24} md={24} lg={24} xl={24} className="mt10px">
           <Button className="add-user-btn" type="primary" icon={<PlusOutlined />} onClick={onNewUserClickHandler}>Add User</Button>
