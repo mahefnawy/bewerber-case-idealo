@@ -6,14 +6,15 @@ svg {
 
 td {
   span:hover {
-    color: $table-link-color;
     cursor: pointer;
   }
 }
 
-.ant-btn {
-  span:hover {
-    color: #fff;
+.ant-space-item{
+  .ant-btn {
+    span:hover {
+      color: #fff;
+    }
   }
 }
 

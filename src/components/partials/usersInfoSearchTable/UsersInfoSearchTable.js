@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Input, Button, Space, Tooltip } from 'antd';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { SearchOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
 import './UserInfoSearchTable.scss';
 
 class UsersInfoSearchTable extends React.Component {
@@ -68,6 +68,10 @@ class UsersInfoSearchTable extends React.Component {
 
   handleDeleteClick = (id) => {
     this.props.onDeleteClick(id);
+  }
+
+  handleDuplicateClick = (record) => {
+    this.props.onFullEditClick(record);
   }
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -145,6 +149,7 @@ class UsersInfoSearchTable extends React.Component {
           <Space size="middle">
             <Tooltip title="Edit"><Button onClick={(e) => this.handleFullEditClick(record)} icon={<EditOutlined />} type="primary" shape="circle" className=""/></Tooltip>
             <Tooltip title="Delete"><Button onClick={(e) => this.handleDeleteClick(record.id)} icon={<DeleteOutlined />} type="primary" shape="circle" danger className=""/></Tooltip>
+            <Tooltip title="Duplicate"><Button onClick={(e) => this.handleDuplicateEditClick(record)} icon={<CopyOutlined />} className="duplicate-btn" type="primary" shape="circle"/></Tooltip>
           </Space>
         ),
       },
