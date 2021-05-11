@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Input, Button, Space, Tooltip } from 'antd';
+import { Table, Input, Button, Space, Tooltip, Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
 
@@ -109,9 +109,11 @@ class UsersInfoSearchTable extends React.Component {
       {
         title: 'Gender',
         dataIndex: 'gender',
-        key: 'key',
+        key: 'gender',
         ...this.getColumnSearchProps('gender'),
-        render: text => <span>{text}</span>
+        render: (gender) => (
+          gender === 'male' ? <Tag color="blue" key={gender}>{gender}</Tag>: <Tag color="pink" key={gender}>{gender}</Tag>
+        ),
       },
       {
         title: 'First Name',
