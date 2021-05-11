@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from "recoil";
-import './index.scss';
+import './styles/Index.scss';
 import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css';
