@@ -1,0 +1,64 @@
+.graph__container {
+  background-color: $white;
+  border: 1px solid #DFE0EB;
+  box-sizing: border-box;
+  border-radius: 8px;
+
+  fill: #000000 !important;
+  font-family: 'Rubik-Regular', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0.3px;
+
+  &:hover {
+    box-shadow: 0 0 10px #CCD2D5;
+    cursor: pointer;
+  }
+
+  .dot {
+    margin-right: 5px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .graph-title {
+    margin-right: 10px;
+    font-family: 'Rubik-Regular', sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+  }
+
+  .pink-color {
+    color: #CD3D91;
+  }
+
+  .pink-background-color {
+    background-color: #CD3D91;
+  }
+
+  .blue-color {
+    color: #1C78DC;
+  }
+
+  .blue-background-color {
+    background-color: #1C78DC;
+  }
+
+  .rv-xy-plot__inner {
+    height: 500px;
+  }
+
+  .rv-xy-plot {
+
+    rect {
+      width: 30px;
+    }
+  }
+}
