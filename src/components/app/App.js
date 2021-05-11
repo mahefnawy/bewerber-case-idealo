@@ -4,6 +4,7 @@ import { PlusOutlined, SendOutlined } from '@ant-design/icons';
 import { useRecoilState } from "recoil";
 import { usersDataAtom } from "../../utils/atoms";
 import UsersInfoSearchTable from '../partials/usersInfoSearchTable/UsersInfoSearchTable';
+import Graphs from '../partials/graphs/Graphs';
 
 function App() {
   const { TextArea } = Input;
@@ -136,6 +137,9 @@ function App() {
   return (
     <div className="App">
       <Row className="over-flow-scroll">
+        <Col  xs={24} sm={24} md={24} lg={24} xl={24} className="mt10px">
+          <Graphs data={usersDataAtomRecoilState}/>
+        </Col>
         <Col  xs={24} sm={24} md={24} lg={24} xl={24} className="mt10px">
           <UsersInfoSearchTable data={usersDataAtomRecoilState} onFullEditClick={onTableFullEditClickHandler} onDeleteClick={onTableDeleteClickHandler} onDuplicateClick={onTableDuplicateClickHandler}/>
         </Col>
