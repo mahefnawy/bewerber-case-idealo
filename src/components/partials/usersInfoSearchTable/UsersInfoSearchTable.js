@@ -2,7 +2,6 @@ import React from 'react';
 import { Table, Input, Button, Space, Tooltip } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined, EditOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons';
-import './UserInfoSearchTable.scss';
 
 class UsersInfoSearchTable extends React.Component {
   state = {

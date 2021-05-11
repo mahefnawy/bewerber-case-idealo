@@ -4,7 +4,6 @@ import { PlusOutlined, SendOutlined } from '@ant-design/icons';
 import { useRecoilState } from "recoil";
 import { usersDataAtom } from "../../utils/atoms";
 import UsersInfoSearchTable from '../partials/usersInfoSearchTable/UsersInfoSearchTable';
-import './App.scss';
 
 function App() {
   const { TextArea } = Input;
